@@ -72,7 +72,7 @@ def get_life_hacker():
 
         if (check_duplicate(rb_url)):
             continue
-        rb_news = '[Raspberry pi news]\n%s\n%s\n\n' % (rb_title, rb_url)
+        rb_news = '[lifehacker]\n%s\n%s\n\n' % (rb_title, rb_url)
         rb_news_msg.append(rb_news)
 
     return rb_news_msg
@@ -86,7 +86,7 @@ def get_alphr():
     # print(soup)
     for l in soup.find_all(match_soup_class(['page-main-area'])):
         for g in l.find_all(match_soup_class(['field-group-format'])):
-            msg = '%s\nhttp://www.alphr.com%s' % (g.a.text, g.a['href'])
+            msg = '[alphr]\n%s\nhttp://www.alphr.com%s' % (g.a.text, g.a['href'])
             alphr.append(msg)
     return alphr
 
@@ -97,14 +97,14 @@ def main():
 
     news = get_life_hacker()
     for i in range(len(news)):
-        # print(rb_news[i])
         s.chat.post_message('raspberrypi', news[i])
+        print('[lifehacker]', news[i])
 
     del news[:]
     news = get_alphr()
     for i in range(len(news)):
-        # print(rb_news[i])
         s.chat.post_message('raspberrypi', news[i])
+        print('[alphr]', news[i])
 
 
 if __name__ == '__main__':

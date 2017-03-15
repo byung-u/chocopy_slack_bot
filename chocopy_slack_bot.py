@@ -86,6 +86,8 @@ def get_alphr():
     # print(soup)
     for l in soup.find_all(match_soup_class(['page-main-area'])):
         for g in l.find_all(match_soup_class(['field-group-format'])):
+            if (check_duplicate(g.a['href'])):
+                continue
             msg = '[alphr]\n%s\nhttp://www.alphr.com%s' % (g.a.text, g.a['href'])
             alphr.append(msg)
     return alphr
